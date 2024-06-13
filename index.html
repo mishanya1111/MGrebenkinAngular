@@ -14,6 +14,18 @@
         }
         console.log(forLoop(10));
 
+        function chess() {
+            var result = "";
+            for(var i = 0; i < 8; i++) {
+                if(i % 2 === 0) {
+                    result += " ";
+                }
+                result += "# # # #\n"
+            }
+            return result;
+        }
+        console.log("chess:\n" + chess());
+
     </script>
 </head>
 <body style="margin: 0px">
