@@ -86,11 +86,7 @@ function isEven(n) {
 }
 
 function countBs(line) {
-    var count = 0;
-    for (let i = 0; i < line.length; i++) {
-        if (line[i] === 'B') count++;
-    }
-    return count;
+    return countChar(line,"B");
 }
 function countChar(line,char) {
     var count = 0;
