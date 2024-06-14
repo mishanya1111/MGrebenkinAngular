@@ -1,12 +1,12 @@
 function forLoop(n) {
     var tempHashtag = "#", result = "";
     for (var i = 0; i < n; i++) {
-        result += tempHashtag.repeat(i) + "\n";
+        result += tempHashtag.repeat(i+1) + "\n";
     }
     return result;
 }
 
-console.log(forLoop(10));
+console.log(forLoop(4));
 
 function chess(n) {
     var result = "";
