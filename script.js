@@ -7,7 +7,9 @@ function start() {
             '2.Шахматы\n' +
             '3.Минимальный элемент\n' +
             '4.Чётность\n' +
-            '5.Выход');
+            '5.Количество B\n' +
+            '6.Количество определённой буквы в заданной строке\n' +
+            '0.Выход');
         switch (selectItem) {
             case '1': {
                 var height = prompt('Введите высоту треугольника');
@@ -22,7 +24,7 @@ function start() {
             case '3': {
                 var num1 = prompt('Введите первый элемент');
                 var num2 = prompt('Введите второй элемент');
-                alert("min between " + num1 + " and " + num2 + " is:" + min(num1, num2));
+                alert("минимальное между  " + num1 + " и " + num2 + " это:" + min(num1, num2));
                 break;
             }
             case '4': {
@@ -33,6 +35,17 @@ function start() {
                 break;
             }
             case '5': {
+                let line = prompt('Введите строку');
+                alert("Количество букв 'B' в заданной строке: " + countBs(line));
+                break;
+            }
+            case '6': {
+                let line = prompt('Введите строку');
+                let char = prompt('Введите символ, кторый будет подсчитан');
+                alert("Количество букв " + char  + " в заданной строке: " + countChar(line, char));
+                break;
+            }
+            case '0': {
                 return 0;
             }
 
@@ -63,8 +76,6 @@ function chess(n) {
     return result;
 }
 
-
-
 function min(a, b) {
     if (a < b) return a;
     return b;
@@ -73,3 +84,19 @@ function min(a, b) {
 function isEven(n) {
     return n % 2 === 0;
 }
+
+function countBs(line) {
+    var count = 0;
+    for (let i = 0; i < line.length; i++) {
+        if (line[i] === 'B') count++;
+    }
+    return count;
+}
+function countChar(line,char) {
+    var count = 0;
+    for (let i = 0; i < line.length; i++) {
+        if (line[i] === char) count++;
+    }
+    return count;
+}
+
