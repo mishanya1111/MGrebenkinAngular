@@ -11,6 +11,8 @@ function start() {
             '6.Количество определённой буквы в заданной строке\n' +
             '7.Сумму элементов массива(2)\n' +
             '8.Сумму элементов массива(3)\n' +
+            '9.Перевернуть массив + новый\n' +
+            '10.Перевернуть массив и оставить всё в нём\n' +
             '0.Выход');
         switch (selectItem) {
             case '1': {
@@ -62,6 +64,26 @@ function start() {
                 let arr = range(num1, num2, num3);
                 alert("массив " + arr);
                 alert("сумма:" + sum(arr))
+                break;
+            }
+            case '9': {
+                let num1 = Number(prompt('Введите первый элемент'));
+                let num2 = Number(prompt('Введите второй элемент'));
+                let num3 = Number(prompt('Введите шаг'));
+                let arr = range(num1, num2, num3);
+                alert("массив до изменения " + arr);
+                let newArr = reverseArray(arr);
+                alert("Новый массив " + newArr);
+                break;
+            }
+            case '10': {
+                let num1 = Number(prompt('Введите первый элемент'));
+                let num2 = Number(prompt('Введите второй элемент'));
+                let num3 = Number(prompt('Введите шаг'));
+                let arr = range(num1, num2, num3);
+                alert("массив до изменения " + arr);
+                reverseArrayInPlace(arr);
+                alert("массив после изменения" + arr);
                 break;
             }
 
@@ -121,26 +143,12 @@ function countChar(line, char) {
 }
 
 function range(num1, num2, step = 1) {
-    let arr = [], i = 0;
-    if (step === 0) return arr;
-    if (step > 0) {
-        while (true) {
-            if (num2 < num1) {
-                break;
-            }
-            arr[i] = num1;
-            num1 += step;
-            i++;
-        }
-    } else {
-        while (true) {
-            if (num2 > num1) {
-                break;
-            }
-            arr[i] = num1;
-            num1 += step;
-            i++;
-        }
+    let arr = [];
+    if (step === 0 || (step > 0 && num1 > num2) || (step < 0 && num1 < num2)) {
+        return [];
+    }
+    for (let i = num1; step > 0 ? i <= num2 : i >= num2; i += step) {
+        arr.push(i);
     }
     return arr;
 }
@@ -152,3 +160,23 @@ function sum(arr) {
     }
     return sumNum;
 }
+
+function reverseArray(arr) {
+    let newArr =[];
+    for (let i = arr.length -1; i >= 0; i--) {
+        newArr.push(arr[i]);
+    }
+    return newArr;
+}
+
+function reverseArrayInPlace(arr) {
+    let len = arr.length;
+    for (let i = 0; i < len / 2 ; i++) {
+        let temp = arr[i];
+        arr[i] = arr[len - 1 - i];
+        arr[len - 1 - i] = temp;
+    }
+}
+
+
+
