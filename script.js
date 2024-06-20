@@ -1,5 +1,3 @@
-start();
-
 function start() {
     while (true) {
         let selectItem = prompt('Введите номер задания которое хотите выполнить:\n' +
@@ -162,8 +160,8 @@ function sum(arr) {
 }
 
 function reverseArray(arr) {
-    let newArr =[];
-    for (let i = arr.length -1; i >= 0; i--) {
+    let newArr = [];
+    for (let i = arr.length - 1; i >= 0; i--) {
         newArr.push(arr[i]);
     }
     return newArr;
@@ -171,7 +169,7 @@ function reverseArray(arr) {
 
 function reverseArrayInPlace(arr) {
     let len = arr.length;
-    for (let i = 0; i < len / 2 ; i++) {
+    for (let i = 0; i < len / 2; i++) {
         let temp = arr[i];
         arr[i] = arr[len - 1 - i];
         arr[len - 1 - i] = temp;
@@ -179,4 +177,56 @@ function reverseArrayInPlace(arr) {
 }
 
 
+function listToArray(_list) {
+    let newArr = [_list.value];
+    let tempList = _list.rest;
+    while (tempList !== null) {
+        newArr.push(tempList.value);
+        tempList = tempList.rest;
+    }
+    return newArr;
+}
 
+function arrayToList(_arr) {
+    if (_arr.length === 0) return null;
+    let newList = {
+        value: _arr[0],
+        rest: null
+    }
+    let tempList = newList;
+    for (let i = 1; i < _arr.length; i++) {
+        tempList.rest = {value: _arr[i], rest: null}
+        tempList = tempList.rest;
+    }
+    return newList;
+}
+
+//console.log(arrayToList(listToArray(list)));
+/*let li = arrayToList([1,2,3]);
+console.log(li);
+console.log(prepend(123,li));*/
+function prepend(_value,_list) {
+    return {
+        value: _value,
+        rest: _list
+    }
+}
+
+function nth(_list,_val) {
+    if (_list === null) return undefined;
+    if (_val === 0) {
+        return _list.value;
+    }
+    return nth(_list.rest,_val-1);
+}
+
+
+console.log(arrayToList([10, 20]));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(listToArray(arrayToList([10, 20, 30])));
+// → [10, 20, 30]
+console.log(prepend(10, prepend(20, null)));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(nth(arrayToList([10, 20, 30]), 1));
+// → 20
+//start();
