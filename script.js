@@ -1,3 +1,4 @@
+//start();
 function start() {
     while (true) {
         let selectItem = prompt('Введите номер задания которое хотите выполнить:\n' +
@@ -205,21 +206,22 @@ function arrayToList(_arr) {
 /*let li = arrayToList([1,2,3]);
 console.log(li);
 console.log(prepend(123,li));*/
-function prepend(_value,_list) {
+function prepend(_value, _list) {
     return {
         value: _value,
         rest: _list
     }
 }
 
-function nth(_list,_val) {
+function nth(_list, _val) {
     if (_list === null) return undefined;
     if (_val === 0) {
         return _list.value;
     }
-    return nth(_list.rest,_val-1);
+    return nth(_list.rest, _val - 1);
 }
 
+/*
 
 console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
@@ -229,4 +231,53 @@ console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
 console.log(nth(arrayToList([10, 20, 30]), 1));
 // → 20
-//start();
+
+*/
+
+let Calculator = {
+    add: function (a, b) {
+        return a + b;
+    },
+    subtract: function (a, b) {
+        return a - b;
+    },
+    multiply: function (a, b) {
+        return a * b;
+    },
+    divide: function (a, b) {
+        return a / b;
+    },
+    power: function (a, b) {
+        return Math.pow(a, b);
+    }
+}
+
+console.log(Calculator.add(8, 6));
+console.log(Calculator.subtract(8, 6));
+console.log(Calculator.multiply(8, 6));
+console.log(Calculator.divide(8, 6));
+console.log(Calculator.power(8, 6));
+
+function arrayAnalyzer(arr) {
+    let evenSum = 0, oddSum = 0, n = arr.length, oddCount = 0;
+    for (let i = 0; i < n; i++) {
+        if (arr[i] % 2 === 1) {
+            oddSum += arr[i];
+            oddCount++;
+        } else evenSum += arr[i];
+    }
+    const oddAverage = oddSum / oddCount;
+    let greaterThanAverage = [];
+    for (let i = 0; i < n; i++) {
+        if (arr[i] > oddAverage) greaterThanAverage.push(arr[i]);
+    }
+    return {
+        evenSum: evenSum,
+        oddAverage: oddAverage,
+        greaterThanAverage: greaterThanAverage
+    }
+}
+
+const numbers = [5, 3, 8, 10, 2, 7, 4, 1, 6, 9];
+const result = arrayAnalyzer(numbers);
+console.log(result);
