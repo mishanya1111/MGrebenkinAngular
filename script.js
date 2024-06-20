@@ -213,7 +213,7 @@ function prepend(_value,_list) {
 }
 
 function nth(_list,_val) {
-    if (_list == null) return undefined;
+    if (_list === null) return undefined;
     if (_val === 0) {
         return _list.value;
     }
