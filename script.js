@@ -252,11 +252,11 @@ let Calculator = {
     }
 }
 
-console.log(Calculator.add(8, 6));
+/*console.log(Calculator.add(8, 6));
 console.log(Calculator.subtract(8, 6));
 console.log(Calculator.multiply(8, 6));
 console.log(Calculator.divide(8, 6));
-console.log(Calculator.power(8, 6));
+console.log(Calculator.power(8, 6));*/
 
 function arrayAnalyzer(arr) {
     let evenSum = 0, oddSum = 0, n = arr.length, oddCount = 0;
@@ -278,6 +278,51 @@ function arrayAnalyzer(arr) {
     }
 }
 
+/*
+
 const numbers = [5, 3, 8, 10, 2, 7, 4, 1, 6, 9];
 const result = arrayAnalyzer(numbers);
-console.log(result);
+console.log(result);*/
+
+let products = {
+    "Laptop": {price: 1000, category: "Electronics"},
+    "Phone": {price: 650, category: "Electronics"},
+    "Tablet": {price: 470, category: "Electronics"},
+    "Lipstick": {price: 20, category: "Fashion"},
+    "Mascara": {price: 25, category: "Fashion"},
+};
+
+
+function listOfProducts(products) {
+    for (const name of Object.keys(products)) {
+        console.log(name);
+    }
+}
+
+function productByName(products, nameProduct) {
+    for (const [productName, {price, category}] of Object.entries(products)) {
+        if (productName === nameProduct) {
+            console.log(`Name: ${productName}, price: ${price} , category: ${category} `);
+        }
+    }
+}
+
+function listOfProductsByCategoryAndPrice(products, categoryProduct, priceProduct) {
+    for (const [nameProduct, {price, category}] of Object.entries(products)) {
+        //
+        if (categoryProduct === category && price <= priceProduct) {
+            console.log(`Name: ${nameProduct}, price: ${price} , category: ${category} `);
+        }
+    }
+}
+
+// Displaying information about all products
+listOfProducts(products);
+// Finding a product by name
+const productName = "Lipstick";
+productByName(products, productName);
+
+const category = "Electronics";
+const price = 800;
+// Finding products by category whose price does not exceed a given value
+listOfProductsByCategoryAndPrice(products, category, price);
