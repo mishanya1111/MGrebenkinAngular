@@ -326,3 +326,42 @@ const category = "Electronics";
 const price = 800;
 // Finding products by category whose price does not exceed a given value
 listOfProductsByCategoryAndPrice(products, category, price);
+
+
+const users = [
+    "Stephen Fry",
+    "Ethel Lilian Voynich",
+    "Neil Gaiman",
+    "Kotaro Isaka",
+    "Isaac Asimov"
+];
+
+function countWords(users) {
+    let arrSize = [];
+    for (const user of users) {
+        arrSize.push(user.split(' ').length);
+    }
+    return arrSize;
+}
+function reverseStrings(users) {
+    for (let i = 0 ; i < users.length; i++) {
+        users[i] = users[i].split("").reverse().join("");
+    }
+    return users;
+}
+function countUniqueCharacters(users) {
+    const allStrings = users.join("");
+    let charSet = new Set;
+    for (const charElement of allStrings) {
+        if (!charSet.has(charElement)) charSet.add(charElement);
+    }
+    const count = charSet.size;
+    return count;
+}
+// Function to count the number of words in each string
+console.log(countWords(users));
+// Function to reverse each string
+console.log(reverseStrings(users));
+
+// Function to count the number of unique characters in all strings
+console.log(countUniqueCharacters(users));
