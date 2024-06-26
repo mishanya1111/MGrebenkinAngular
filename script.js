@@ -337,17 +337,17 @@ const users = [
 ];
 
 function countWords(users) {
-    let count =0;
+    let arrSize = [];
     for (const user of users) {
-        count += user.split(' ').length;
+        arrSize.push(user.split(' ').length);
     }
-    console.log(count);
+    return arrSize;
 }
 function reverseStrings(users) {
     for (let i = 0 ; i < users.length; i++) {
         users[i] = users[i].split("").reverse().join("");
     }
-    console.log(users);
+    return users;
 }
 function countUniqueCharacters(users) {
     const allStrings = users.join("");
@@ -356,13 +356,12 @@ function countUniqueCharacters(users) {
         if (!charSet.has(charElement)) charSet.add(charElement);
     }
     const count = charSet.size;
-    console.log(count);
+    return count;
 }
 // Function to count the number of words in each string
-countWords(users);
-
+console.log(countWords(users));
 // Function to reverse each string
-reverseStrings(users);
+console.log(reverseStrings(users));
 
 // Function to count the number of unique characters in all strings
-countUniqueCharacters(users);
+console.log(countUniqueCharacters(users));
