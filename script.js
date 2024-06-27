@@ -315,17 +315,17 @@ function listOfProductsByCategoryAndPrice(products, categoryProduct, priceProduc
         }
     }
 }
-
-// Displaying information about all products
-listOfProducts(products);
-// Finding a product by name
-const productName = "Lipstick";
-productByName(products, productName);
-
-const category = "Electronics";
-const price = 800;
-// Finding products by category whose price does not exceed a given value
-listOfProductsByCategoryAndPrice(products, category, price);
+//
+// // Displaying information about all products
+// listOfProducts(products);
+// // Finding a product by name
+// const productName = "Lipstick";
+// productByName(products, productName);
+//
+// const category = "Electronics";
+// const price = 800;
+// // Finding products by category whose price does not exceed a given value
+// listOfProductsByCategoryAndPrice(products, category, price);
 
 
 const users = [
@@ -355,13 +355,33 @@ function countUniqueCharacters(users) {
     for (const charElement of allStrings) {
         if (!charSet.has(charElement)) charSet.add(charElement);
     }
-    const count = charSet.size;
-    return count;
+    return charSet.size;
 }
 // Function to count the number of words in each string
-console.log(countWords(users));
-// Function to reverse each string
-console.log(reverseStrings(users));
+// console.log(countWords(users));
+// // Function to reverse each string
+// console.log(reverseStrings(users));
+//
+// // Function to count the number of unique characters in all strings
+// console.log(countUniqueCharacters(users));
 
-// Function to count the number of unique characters in all strings
-console.log(countUniqueCharacters(users));
+
+const sumOfTwo = (x, y) => x + y;
+function memoization(func) {
+    let memorizationMap = new Map;
+    return function(...arr) {
+        let keyString = arr.join('+');
+        if(memorizationMap.has(keyString)) return memorizationMap.get(keyString);
+        else {
+            let answer = func(...arr);
+            console.log("func");
+            memorizationMap.set(keyString,answer);
+            return answer;
+        }
+    }
+}
+const memoizedFunction = memoization(sumOfTwo);
+console.log(memoizedFunction(2, 3)); // Calculating sum of 2 and 3, returns 5
+console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
+console.log(memoizedFunction(1, 5));
+console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
