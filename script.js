@@ -367,17 +367,16 @@ function countUniqueCharacters(users) {
 
 
 const sumOfTwo = (x, y) => x + y;
+
 function memoization(func) {
     let memorizationMap = new Map;
-    return function(...arr) {
-        let keyString = arr.join('+');
-        if(memorizationMap.has(keyString)) return memorizationMap.get(keyString);
-        else {
-            let answer = func(...arr);
-            console.log("func");
-            memorizationMap.set(keyString,answer);
-            return answer;
-        }
+    return function (...arr) {
+        let keyString = JSON.stringify(arr);
+        if (memorizationMap.has(keyString)) return memorizationMap.get(keyString);
+        let answer = func(...arr);
+        console.log("func");
+        memorizationMap.set(keyString, answer);
+        return answer;
     }
 }
 const memoizedFunction = memoization(sumOfTwo);
