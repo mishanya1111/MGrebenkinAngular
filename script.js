@@ -402,10 +402,14 @@ const exchangeRates = {
     GBP: {USD: 1.33, EUR: 1.21}
 };
 
-const calculateTotalPrice = function (items, baseCurrency, exchangeRates) {
-    return items.map(({_, price, currency}) => [currency, price])
-        .map(([currency, price]) => currency === baseCurrency ? price[currency] : exchangeRates[currency][baseCurrency] * price[currency])
-        .reduce((acc, val) => acc + val, 0);
+function  calculateTotalPrice (items, baseCurrency, exchangeRates) {
+    return items.reduce((acc, purchase) => {
+        if (purchase.currency !== baseCurrency) {
+            return acc + exchangeRates[purchase.currency][baseCurrency] * purchase.price[purchase.currency];
+        } else {
+            return acc + purchase.price[purchase.currency];
+        }
+    }, 0);
 }
 
 const baseCurrency = 'USD';
