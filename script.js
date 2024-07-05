@@ -415,3 +415,25 @@ function  calculateTotalPrice (items, baseCurrency, exchangeRates) {
 const baseCurrency = 'USD';
 const totalCost = calculateTotalPrice(purchases, baseCurrency, exchangeRates);
 console.log(totalCost);
+
+
+
+const events = [];
+function addEvent(name, date) {
+    events.push({name: name,date: new Date(date)})
+}
+
+function removeEvent(nameDel) {
+    events.splice(events.findIndex(({name}) => nameDel === name ));
+}
+function getUpcomingEvents() {
+    const date1 = new Date();
+    const date2 = new Date(1000 * 60 * 60 * 24 * 7);
+    return events.filter(({_,date}) => (date <= (+date1 + +date2) && (date >= +date1 )));
+}
+addEvent('Client Meeting', '2024-07-09 14:30');
+addEvent('Lunch with Colleagues', '2024-06-27 12:00');
+addEvent('Conference', '2024-06-26 09:00');
+addEvent('Michael Day', '2024-11-31 00:00');
+removeEvent('Conference');
+console.log(getUpcomingEvents());
