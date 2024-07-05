@@ -315,6 +315,7 @@ function listOfProductsByCategoryAndPrice(products, categoryProduct, priceProduc
         }
     }
 }
+
 //
 // // Displaying information about all products
 // listOfProducts(products);
@@ -343,12 +344,14 @@ function countWords(users) {
     }
     return arrSize;
 }
+
 function reverseStrings(users) {
-    for (let i = 0 ; i < users.length; i++) {
+    for (let i = 0; i < users.length; i++) {
         users[i] = users[i].split("").reverse().join("");
     }
     return users;
 }
+
 function countUniqueCharacters(users) {
     const allStrings = users.join("");
     let charSet = new Set;
@@ -357,6 +360,7 @@ function countUniqueCharacters(users) {
     }
     return charSet.size;
 }
+
 // Function to count the number of words in each string
 // console.log(countWords(users));
 // // Function to reverse each string
@@ -379,8 +383,35 @@ function memoization(func) {
         return answer;
     }
 }
+
 const memoizedFunction = memoization(sumOfTwo);
-console.log(memoizedFunction(2, 3)); // Calculating sum of 2 and 3, returns 5
-console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
-console.log(memoizedFunction(1, 5));
-console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
+// console.log(memoizedFunction(2, 3)); // Calculating sum of 2 and 3, returns 5
+// console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
+// console.log(memoizedFunction(1, 5));
+// console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
+const purchases = [
+    {item: 'Book', price: {USD: 20, EUR: 18, GBP: 15}, currency: 'EUR'},
+    {item: 'T-shirt', price: {USD: 10, EUR: 9, GBP: 7}, currency: 'GBP'},
+    {item: 'Laptop', price: {USD: 1000, EUR: 900, GBP: 750}, currency: 'USD'},
+    {item: 'Pot', price: {USD: 15, EUR: 13.5, GBP: 11.25}, currency: 'EUR'}
+];
+
+const exchangeRates = {
+    USD: {EUR: 0.9, GBP: 0.75},
+    EUR: {USD: 1.1, GBP: 0.83},
+    GBP: {USD: 1.33, EUR: 1.21}
+};
+
+function  calculateTotalPrice (items, baseCurrency, exchangeRates) {
+    return items.reduce((acc, purchase) => {
+        if (purchase.currency !== baseCurrency) {
+            return acc + exchangeRates[purchase.currency][baseCurrency] * purchase.price[purchase.currency];
+        } else {
+            return acc + purchase.price[purchase.currency];
+        }
+    }, 0);
+}
+
+const baseCurrency = 'USD';
+const totalCost = calculateTotalPrice(purchases, baseCurrency, exchangeRates);
+console.log(totalCost);
