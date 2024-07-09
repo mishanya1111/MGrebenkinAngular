@@ -483,7 +483,7 @@ class TaskManager {
         if (indexDelete !== -1) {
             this.tasks.splice(indexDelete, 1);
         }
-        return this;
+
     }
 
     getTaskById(taskId) {
@@ -504,7 +504,7 @@ class TaskManager {
             this.tasks[indexTask] = updatedTask;
             this.tasks[indexTask].status = "in progress";
         }
-        return this;
+
     }
 
     markTaskAsComplete(taskId) {
@@ -512,7 +512,7 @@ class TaskManager {
         if (indexTask !== -1) {
             this.tasks[indexTask].status = "completed";
         }
-        return this;
+
     }
 
     getTasksCount() {
