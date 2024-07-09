@@ -414,4 +414,33 @@ function  calculateTotalPrice (items, baseCurrency, exchangeRates) {
 
 const baseCurrency = 'USD';
 const totalCost = calculateTotalPrice(purchases, baseCurrency, exchangeRates);
-console.log(totalCost);
+//console.log(totalCost);
+
+
+
+const events = [];
+function addEvent(name, date) {
+    events.push({name: name,date: new Date(date)})
+}
+
+function removeEvent(nameDel) {
+    const indexDelete = events.findIndex(({name}) => nameDel === name );
+    if(indexDelete !== -1){
+        events.splice(indexDelete, 1);
+    }
+}
+function getUpcomingEvents() {
+    const today = new Date();
+    const nextWeek = new Date(+today + 1000 * 60 * 60 * 24 * 7);
+    return events.filter((event) =>
+        event.date >= today && event.date <= nextWeek
+    ).sort((a,b) => +a.date - +b.date);
+}
+addEvent('Client Meeting', '2024-07-13 14:30');
+addEvent('Lunch with Colleagues', '2024-06-27 12:00');
+addEvent('Conference', '2024-06-26 09:00');
+addEvent('Michael Day', '2024-11-31 00:00');
+addEvent('Check Day', '2024-07-09 01:00');
+removeEvent('Conference');
+console.log(events);
+console.log(getUpcomingEvents());
