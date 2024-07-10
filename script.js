@@ -474,24 +474,15 @@ class TaskManager {
     }
 
     addTask(name, description, assignedTo, dueDate) {
-        return this.tasks.push(new Task(name, description, assignedTo, dueDate));
+        this.tasks.push(new Task(name, description, assignedTo, dueDate));
     }
 
     deleteTask(taskId) {
-        // console.log(this.tasks.filter((task) => task.id !== taskId));
-        const indexDelete = this.tasks.findIndex((task) => task.id === taskId);
-        if (indexDelete !== -1) {
-            this.tasks.splice(indexDelete, 1);
-        }
-
+        this.tasks = this.tasks.filter(task => task.id !== taskId);
     }
 
     getTaskById(taskId) {
-        const indexTask = this.tasks.findIndex((task) => task.id === taskId);
-        if (indexTask !== -1) {
-            return this.tasks[indexTask];
-        }
-        return undefined;
+        return this.tasks.find(task => task.id === taskId);
     }
 
     getTasks() {
@@ -501,18 +492,16 @@ class TaskManager {
     updateTask(taskId, updatedTask) {
         const indexTask = this.tasks.findIndex((task) => task.id === taskId);
         if (indexTask !== -1) {
-            this.tasks[indexTask] = updatedTask;
-            this.tasks[indexTask].status = "in progress";
+            this.tasks[indexTask] = { ...updatedTask, id: taskId };
         }
 
     }
 
     markTaskAsComplete(taskId) {
-        const indexTask = this.tasks.findIndex((task) => task.id === taskId);
-        if (indexTask !== -1) {
-            this.tasks[indexTask].status = "completed";
+        const task = this.getTaskById(taskId);
+        if (task) {
+            task.status = 'completed';
         }
-
     }
 
     getTasksCount() {
@@ -529,15 +518,23 @@ TM.addTask("task3", "it is test task3, longer description", "Marina", "03 July 2
 
 const task4 = new Task("task4", "Just tusk 4", "Alex", "04 September 2024")
 
-let tasks = TM.getTasks();
-console.log(tasks);
-console.log(tasks[1]["id"]);
-TM.deleteTask(tasks[1]["id"]);
-console.log(tasks);
-console.log(TM.getTaskById(tasks[0]["id"]));
-TM.updateTask(tasks[0]["id"], task4)
-console.log(tasks);
-TM.markTaskAsComplete(tasks[1]["id"])
-console.log(tasks);
-console.log(TM.getTasksCount());
+console.log("All tasks", TM.getTasks());
 
+const taskIdToDelete = TM.getTasks()[1]["id"];
+console.log("Id to delete", taskIdToDelete);
+
+TM.deleteTask(taskIdToDelete);
+console.log("After delete", TM.getTasks());
+
+const taskIdToUpdate = TM.getTasks()[0]["id"];
+console.log("Id to update", taskIdToUpdate);
+
+TM.updateTask(taskIdToUpdate, task4);
+console.log("Task after update", TM.getTaskById(taskIdToUpdate));
+
+const taskIdToMarkAsCompleted = 1;
+TM.markTaskAsComplete(taskIdToMarkAsCompleted);
+console.log("Completed task", TM.getTaskById(taskIdToMarkAsCompleted));
+
+console.log("After all changes", TM.getTasks());
+console.log(TM.getTasksCount());
