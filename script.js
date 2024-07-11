@@ -526,10 +526,8 @@ async function  getData() {
                 !data['Special Attack(s)'])
                 return false;
 
-            //with "both???" "Water" and(or) ("or" because there are no pokemons with fire and water) "Fire" types
             const arrType = data['Special Attack(s)'].map((attack) => attack?.Type);
-            if (!arrType.includes("Water") && !arrType.includes("Fire")) return false;
-            return true;//can be simplified
+            return (arrType.includes("Water") && arrType.includes("Fire"));
         })
         return result;
     } catch (err) {
