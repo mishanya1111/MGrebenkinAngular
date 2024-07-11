@@ -1,18 +1,7 @@
 //start();
 function start() {
     while (true) {
-        let selectItem = prompt('Введите номер задания которое хотите выполнить:\n' +
-            '1.Треугольник\n' +
-            '2.Шахматы\n' +
-            '3.Минимальный элемент\n' +
-            '4.Чётность\n' +
-            '5.Количество B\n' +
-            '6.Количество определённой буквы в заданной строке\n' +
-            '7.Сумму элементов массива(2)\n' +
-            '8.Сумму элементов массива(3)\n' +
-            '9.Перевернуть массив + новый\n' +
-            '10.Перевернуть массив и оставить всё в нём\n' +
-            '0.Выход');
+        let selectItem = prompt('Введите номер задания которое хотите выполнить:\n' + '1.Треугольник\n' + '2.Шахматы\n' + '3.Минимальный элемент\n' + '4.Чётность\n' + '5.Количество B\n' + '6.Количество определённой буквы в заданной строке\n' + '7.Сумму элементов массива(2)\n' + '8.Сумму элементов массива(3)\n' + '9.Перевернуть массив + новый\n' + '10.Перевернуть массив и оставить всё в нём\n' + '0.Выход');
         switch (selectItem) {
             case '1': {
                 let height = prompt('Введите высоту треугольника');
@@ -191,8 +180,7 @@ function listToArray(_list) {
 function arrayToList(_arr) {
     if (_arr.length === 0) return null;
     let newList = {
-        value: _arr[0],
-        rest: null
+        value: _arr[0], rest: null
     }
     let tempList = newList;
     for (let i = 1; i < _arr.length; i++) {
@@ -208,8 +196,7 @@ console.log(li);
 console.log(prepend(123,li));*/
 function prepend(_value, _list) {
     return {
-        value: _value,
-        rest: _list
+        value: _value, rest: _list
     }
 }
 
@@ -237,17 +224,13 @@ console.log(nth(arrayToList([10, 20, 30]), 1));
 let Calculator = {
     add: function (a, b) {
         return a + b;
-    },
-    subtract: function (a, b) {
+    }, subtract: function (a, b) {
         return a - b;
-    },
-    multiply: function (a, b) {
+    }, multiply: function (a, b) {
         return a * b;
-    },
-    divide: function (a, b) {
+    }, divide: function (a, b) {
         return a / b;
-    },
-    power: function (a, b) {
+    }, power: function (a, b) {
         return Math.pow(a, b);
     }
 }
@@ -272,9 +255,7 @@ function arrayAnalyzer(arr) {
         if (arr[i] > oddAverage) greaterThanAverage.push(arr[i]);
     }
     return {
-        evenSum: evenSum,
-        oddAverage: oddAverage,
-        greaterThanAverage: greaterThanAverage
+        evenSum: evenSum, oddAverage: oddAverage, greaterThanAverage: greaterThanAverage
     }
 }
 
@@ -329,13 +310,7 @@ function listOfProductsByCategoryAndPrice(products, categoryProduct, priceProduc
 // listOfProductsByCategoryAndPrice(products, category, price);
 
 
-const users = [
-    "Stephen Fry",
-    "Ethel Lilian Voynich",
-    "Neil Gaiman",
-    "Kotaro Isaka",
-    "Isaac Asimov"
-];
+const users = ["Stephen Fry", "Ethel Lilian Voynich", "Neil Gaiman", "Kotaro Isaka", "Isaac Asimov"];
 
 function countWords(users) {
     let arrSize = [];
@@ -389,17 +364,18 @@ const memoizedFunction = memoization(sumOfTwo);
 // console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
 // console.log(memoizedFunction(1, 5));
 // console.log(memoizedFunction(2, 3)); // Returns 5 (fetches from cache)
-const purchases = [
-    {item: 'Book', price: {USD: 20, EUR: 18, GBP: 15}, currency: 'EUR'},
-    {item: 'T-shirt', price: {USD: 10, EUR: 9, GBP: 7}, currency: 'GBP'},
-    {item: 'Laptop', price: {USD: 1000, EUR: 900, GBP: 750}, currency: 'USD'},
-    {item: 'Pot', price: {USD: 15, EUR: 13.5, GBP: 11.25}, currency: 'EUR'}
-];
+const purchases = [{item: 'Book', price: {USD: 20, EUR: 18, GBP: 15}, currency: 'EUR'}, {
+    item: 'T-shirt',
+    price: {USD: 10, EUR: 9, GBP: 7},
+    currency: 'GBP'
+}, {item: 'Laptop', price: {USD: 1000, EUR: 900, GBP: 750}, currency: 'USD'}, {
+    item: 'Pot',
+    price: {USD: 15, EUR: 13.5, GBP: 11.25},
+    currency: 'EUR'
+}];
 
 const exchangeRates = {
-    USD: {EUR: 0.9, GBP: 0.75},
-    EUR: {USD: 1.1, GBP: 0.83},
-    GBP: {USD: 1.33, EUR: 1.21}
+    USD: {EUR: 0.9, GBP: 0.75}, EUR: {USD: 1.1, GBP: 0.83}, GBP: {USD: 1.33, EUR: 1.21}
 };
 
 function calculateTotalPrice(items, baseCurrency, exchangeRates) {
@@ -433,9 +409,7 @@ function removeEvent(nameDel) {
 function getUpcomingEvents() {
     const today = new Date();
     const nextWeek = new Date(+today + 1000 * 60 * 60 * 24 * 7);
-    return events.filter((event) =>
-        event.date >= today && event.date <= nextWeek
-    ).sort((a, b) => +a.date - +b.date);
+    return events.filter((event) => event.date >= today && event.date <= nextWeek).sort((a, b) => +a.date - +b.date);
 }
 
 addEvent('Client Meeting', '2024-07-13 14:30');
@@ -492,7 +466,7 @@ class TaskManager {
     updateTask(taskId, updatedTask) {
         const indexTask = this.tasks.findIndex((task) => task.id === taskId);
         if (indexTask !== -1) {
-            this.tasks[indexTask] = { ...updatedTask, id: taskId };
+            this.tasks[indexTask] = {...updatedTask, id: taskId};
         }
 
     }
@@ -510,6 +484,7 @@ class TaskManager {
 
 }
 
+/*
 
 let TM = new TaskManager();
 TM.addTask("task1", "it is test task1", "Michael", "01 July 2025");
@@ -538,3 +513,31 @@ console.log("Completed task", TM.getTaskById(taskIdToMarkAsCompleted));
 
 console.log("After all changes", TM.getTasks());
 console.log(TM.getTasksCount());
+*/
+async function  getData() {
+    try {
+        const allData = await fetch('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json');
+        let dataJSON = await allData.json();
+        const result = dataJSON.filter((data) => {
+            //have more than 1 fast attacks, more than 2 special attacks
+            if (data['Fast Attack(s)']?.length < 2 ||
+                data['Special Attack(s)']?.length < 3 ||
+                !data ||
+                !data['Special Attack(s)'])
+                return false;
+
+            //with "both???" "Water" and(or) ("or" because there are no pokemons with fire and water) "Fire" types
+            const arrType = data['Special Attack(s)'].map((attack) => attack?.Type);
+            if (!arrType.includes("Water") && !arrType.includes("Fire")) return false;
+            return true;//can be simplified
+        })
+        return result;
+    } catch (err) {
+        console.error(err.message)
+    }
+}
+
+(async function() {
+    const result = await getData();
+    console.log(result);
+})();
