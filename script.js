@@ -402,7 +402,7 @@ const exchangeRates = {
     GBP: {USD: 1.33, EUR: 1.21}
 };
 
-function  calculateTotalPrice (items, baseCurrency, exchangeRates) {
+function calculateTotalPrice(items, baseCurrency, exchangeRates) {
     return items.reduce((acc, purchase) => {
         if (purchase.currency !== baseCurrency) {
             return acc + exchangeRates[purchase.currency][baseCurrency] * purchase.price[purchase.currency];
@@ -417,30 +417,124 @@ const totalCost = calculateTotalPrice(purchases, baseCurrency, exchangeRates);
 //console.log(totalCost);
 
 
-
 const events = [];
+
 function addEvent(name, date) {
-    events.push({name: name,date: new Date(date)})
+    events.push({name: name, date: new Date(date)})
 }
 
 function removeEvent(nameDel) {
-    const indexDelete = events.findIndex(({name}) => nameDel === name );
-    if(indexDelete !== -1){
+    const indexDelete = events.findIndex(({name}) => nameDel === name);
+    if (indexDelete !== -1) {
         events.splice(indexDelete, 1);
     }
 }
+
 function getUpcomingEvents() {
     const today = new Date();
     const nextWeek = new Date(+today + 1000 * 60 * 60 * 24 * 7);
     return events.filter((event) =>
         event.date >= today && event.date <= nextWeek
-    ).sort((a,b) => +a.date - +b.date);
+    ).sort((a, b) => +a.date - +b.date);
 }
+
 addEvent('Client Meeting', '2024-07-13 14:30');
 addEvent('Lunch with Colleagues', '2024-06-27 12:00');
 addEvent('Conference', '2024-06-26 09:00');
 addEvent('Michael Day', '2024-11-31 00:00');
 addEvent('Check Day', '2024-07-09 01:00');
 removeEvent('Conference');
-console.log(events);
-console.log(getUpcomingEvents());
+//console.log(events);
+//console.log(getUpcomingEvents());
+/*
+const uniqueId = () => {
+    const dateString = Date.now().toString(36);
+    const randomness = Math.random().toString(36).substr(2);
+    return dateString + randomness;
+};
+*/
+
+class Task {
+    constructor(name, description, assignedTo, dueDate, status = "pending") {
+        this.id = ++Task.currentId;
+        this.name = name;
+        this.description = description;
+        this.assignedTo = assignedTo;
+        this.dueDate = new Date(dueDate);
+        this.status = status;
+    }
+}
+
+Task.currentId = 0;
+
+class TaskManager {
+    constructor() {
+        this.tasks = [];
+        this.currentId = 0;
+    }
+
+    addTask(name, description, assignedTo, dueDate) {
+        this.tasks.push(new Task(name, description, assignedTo, dueDate));
+    }
+
+    deleteTask(taskId) {
+        this.tasks = this.tasks.filter(task => task.id !== taskId);
+    }
+
+    getTaskById(taskId) {
+        return this.tasks.find(task => task.id === taskId);
+    }
+
+    getTasks() {
+        return this.tasks;
+    }
+
+    updateTask(taskId, updatedTask) {
+        const indexTask = this.tasks.findIndex((task) => task.id === taskId);
+        if (indexTask !== -1) {
+            this.tasks[indexTask] = { ...updatedTask, id: taskId };
+        }
+
+    }
+
+    markTaskAsComplete(taskId) {
+        const task = this.getTaskById(taskId);
+        if (task) {
+            task.status = 'completed';
+        }
+    }
+
+    getTasksCount() {
+        return this.tasks.length;
+    }
+
+}
+
+
+let TM = new TaskManager();
+TM.addTask("task1", "it is test task1", "Michael", "01 July 2025");
+TM.addTask("task2", "it  task2", "Michael", "02 December 2024");
+TM.addTask("task3", "it is test task3, longer description", "Marina", "03 July 2025");
+
+const task4 = new Task("task4", "Just tusk 4", "Alex", "04 September 2024")
+
+console.log("All tasks", TM.getTasks());
+
+const taskIdToDelete = TM.getTasks()[1]["id"];
+console.log("Id to delete", taskIdToDelete);
+
+TM.deleteTask(taskIdToDelete);
+console.log("After delete", TM.getTasks());
+
+const taskIdToUpdate = TM.getTasks()[0]["id"];
+console.log("Id to update", taskIdToUpdate);
+
+TM.updateTask(taskIdToUpdate, task4);
+console.log("Task after update", TM.getTaskById(taskIdToUpdate));
+
+const taskIdToMarkAsCompleted = 1;
+TM.markTaskAsComplete(taskIdToMarkAsCompleted);
+console.log("Completed task", TM.getTaskById(taskIdToMarkAsCompleted));
+
+console.log("After all changes", TM.getTasks());
+console.log(TM.getTasksCount());
