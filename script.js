@@ -514,28 +514,31 @@ console.log("Completed task", TM.getTaskById(taskIdToMarkAsCompleted));
 console.log("After all changes", TM.getTasks());
 console.log(TM.getTasksCount());
 */
-async function  getData() {
+async function getData() {
     try {
         const allData = await fetch('https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json');
         let dataJSON = await allData.json();
-        const result = dataJSON.filter((data) => {
-            //have more than 1 fast attacks, more than 2 special attacks
-            if (data['Fast Attack(s)']?.length < 2 ||
-                data['Special Attack(s)']?.length < 3 ||
-                !data ||
-                !data['Special Attack(s)'])
-                return false;
+        const result = dataJSON.filter((data) =>
+            data && data['Fast Attack(s)']?.length > 1 && data['Special Attack(s)'].length > 2 &&
+            data['Special Attack(s)'].map((attack) => attack?.Type).includes("Water") &&
+            data['Special Attack(s)'].map((attack) => attack?.Type).includes("Poison"));
 
-            const arrType = data['Special Attack(s)'].map((attack) => attack?.Type);
-            return (arrType.includes("Water") && arrType.includes("Fire"));
-        })
+        //have more than 1 fast attacks, more than 2 special attacks
+        /*if (data['Fast Attack(s)']?.length < 2 ||
+            data['Special Attack(s)']?.length < 3 ||
+            !data ||
+            !data['Special Attack(s)'])
+            return false;
+
+        const arrType = data['Special Attack(s)'].map((attack) => attack?.Type);
+        return (arrType.includes("Water") && arrType.includes("Poison"));*/
         return result;
     } catch (err) {
         console.error(err.message)
     }
 }
 
-(async function() {
+(async function () {
     const result = await getData();
     console.log(result);
 })();
