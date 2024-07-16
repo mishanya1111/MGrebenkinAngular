@@ -520,8 +520,8 @@ async function getData() {
         let dataJSON = await allData.json();
         const result = dataJSON.filter((data) =>
             data && data['Fast Attack(s)']?.length > 1 && data['Special Attack(s)'].length > 2 &&
-            data['Special Attack(s)'].map((attack) => attack?.Type).includes("Water") &&
-            data['Special Attack(s)'].map((attack) => attack?.Type).includes("Poison"));
+            data['Types'].includes("Water") &&
+            data['Types'].includes("Poison"));
 
         //have more than 1 fast attacks, more than 2 special attacks
         /*if (data['Fast Attack(s)']?.length < 2 ||
